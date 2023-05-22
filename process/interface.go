@@ -12,6 +12,7 @@ type DataProcessor interface {
 	IsInterfaceNil() bool
 }
 
+// Logger defines the behavior of a data logger component
 type Logger interface {
 	Info(message string, args ...interface{})
 	IsInterfaceNil() bool
