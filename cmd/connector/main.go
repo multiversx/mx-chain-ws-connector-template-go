@@ -16,7 +16,7 @@ import (
 	"github.com/urfave/cli"
 )
 
-var log = logger.GetOrCreate("mx-chain-sovereign-notifier")
+var log = logger.GetOrCreate("mx-chain-ws-connector-template-go")
 
 const (
 	configPath = "config/config.toml"

@@ -11,18 +11,18 @@ import (
 
 var log = logger.GetOrCreate("data-processor")
 
-type dataProcessor struct {
+type logDataProcessor struct {
 	marshaller        marshal.Marshalizer
 	operationHandlers map[string]func(marshalledData []byte) error
 }
 
-// NewDataProcessor creates a data processor able to receive data from a ws outport driver
-func NewDataProcessor(marshaller marshal.Marshalizer) (DataProcessor, error) {
+// NewLogDataProcessor creates a data processor able to receive data from a ws outport driver and log events
+func NewLogDataProcessor(marshaller marshal.Marshalizer) (DataProcessor, error) {
 	if check.IfNil(marshaller) {
 		return nil, errNilMarshaller
 	}
 
-	dp := &dataProcessor{
+	dp := &logDataProcessor{
 		marshaller: marshaller,
 	}
 
@@ -40,7 +40,7 @@ func NewDataProcessor(marshaller marshal.Marshalizer) (DataProcessor, error) {
 }
 
 // ProcessPayload will process the received payload, if the topic is known.
-func (dp *dataProcessor) ProcessPayload(payload []byte, topic string) error {
+func (dp *logDataProcessor) ProcessPayload(payload []byte, topic string) error {
 	operationHandler, found := dp.operationHandlers[topic]
 	if !found {
 		return fmt.Errorf("%w, operation type for topic = %s, received data = %s",
@@ -50,7 +50,7 @@ func (dp *dataProcessor) ProcessPayload(payload []byte, topic string) error {
 	return operationHandler(payload)
 }
 
-func (dp *dataProcessor) saveBlock(marshalledData []byte) error {
+func (dp *logDataProcessor) saveBlock(marshalledData []byte) error {
 	outportBlock := &outport.OutportBlock{}
 	err := dp.marshaller.Unmarshal(outportBlock, marshalledData)
 	if err != nil {
@@ -62,7 +62,7 @@ func (dp *dataProcessor) saveBlock(marshalledData []byte) error {
 	return nil
 }
 
-func (dp *dataProcessor) revertIndexedBlock(marshalledData []byte) error {
+func (dp *logDataProcessor) revertIndexedBlock(marshalledData []byte) error {
 	blockData := &outport.BlockData{}
 	err := dp.marshaller.Unmarshal(blockData, marshalledData)
 	if err != nil {
@@ -74,7 +74,7 @@ func (dp *dataProcessor) revertIndexedBlock(marshalledData []byte) error {
 	return nil
 }
 
-func (dp *dataProcessor) saveRounds(marshalledData []byte) error {
+func (dp *logDataProcessor) saveRounds(marshalledData []byte) error {
 	roundsInfo := &outport.RoundsInfo{}
 	err := dp.marshaller.Unmarshal(roundsInfo, marshalledData)
 	if err != nil {
@@ -86,7 +86,7 @@ func (dp *dataProcessor) saveRounds(marshalledData []byte) error {
 	return nil
 }
 
-func (dp *dataProcessor) saveValidatorsRating(marshalledData []byte) error {
+func (dp *logDataProcessor) saveValidatorsRating(marshalledData []byte) error {
 	ratingData := &outport.ValidatorsRating{}
 	err := dp.marshaller.Unmarshal(ratingData, marshalledData)
 	if err != nil {
@@ -98,7 +98,7 @@ func (dp *dataProcessor) saveValidatorsRating(marshalledData []byte) error {
 	return nil
 }
 
-func (dp *dataProcessor) saveValidatorsPubKeys(marshalledData []byte) error {
+func (dp *logDataProcessor) saveValidatorsPubKeys(marshalledData []byte) error {
 	validatorsPubKeys := &outport.ValidatorsPubKeys{}
 	err := dp.marshaller.Unmarshal(validatorsPubKeys, marshalledData)
 	if err != nil {
@@ -110,7 +110,7 @@ func (dp *dataProcessor) saveValidatorsPubKeys(marshalledData []byte) error {
 	return nil
 }
 
-func (dp *dataProcessor) saveAccounts(marshalledData []byte) error {
+func (dp *logDataProcessor) saveAccounts(marshalledData []byte) error {
 	accounts := &outport.Accounts{}
 	err := dp.marshaller.Unmarshal(accounts, marshalledData)
 	if err != nil {
@@ -122,7 +122,7 @@ func (dp *dataProcessor) saveAccounts(marshalledData []byte) error {
 	return nil
 }
 
-func (dp *dataProcessor) finalizedBlock(marshalledData []byte) error {
+func (dp *logDataProcessor) finalizedBlock(marshalledData []byte) error {
 	finalizedBlock := &outport.FinalizedBlock{}
 	err := dp.marshaller.Unmarshal(finalizedBlock, marshalledData)
 	if err != nil {
@@ -135,12 +135,12 @@ func (dp *dataProcessor) finalizedBlock(marshalledData []byte) error {
 }
 
 // Close will signal via a log that the data processor is closed
-func (dp *dataProcessor) Close() error {
+func (dp *logDataProcessor) Close() error {
 	log.Info("data processor closed")
 	return nil
 }
 
 // IsInterfaceNil checks if the underlying pointer is nil
-func (dp *dataProcessor) IsInterfaceNil() bool {
+func (dp *logDataProcessor) IsInterfaceNil() bool {
 	return dp == nil
 }
