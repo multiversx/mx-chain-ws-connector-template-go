@@ -11,3 +11,8 @@ type DataProcessor interface {
 	Close() error
 	IsInterfaceNil() bool
 }
+
+type Logger interface {
+	Info(message string, args ...interface{})
+	IsInterfaceNil() bool
+}

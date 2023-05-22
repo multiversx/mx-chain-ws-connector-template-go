@@ -20,7 +20,7 @@ func CreateWSConnector(cfg config.WebSocketConfig) (process.WSConnector, error) 
 		return nil, err
 	}
 
-	dataProcessor, err := process.NewLogDataProcessor(marshaller)
+	dataProcessor, err := process.NewLogDataProcessor(marshaller, log)
 	if err != nil {
 		return nil, err
 	}

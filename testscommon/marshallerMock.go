@@ -12,7 +12,7 @@ type MarshallerMock struct {
 // Marshal -
 func (mm *MarshallerMock) Marshal(obj interface{}) ([]byte, error) {
 	if obj == nil {
-		return nil, errors.New("nil object to serilize from")
+		return nil, errors.New("nil object to serialize from")
 	}
 
 	return json.Marshal(obj)
@@ -21,7 +21,7 @@ func (mm *MarshallerMock) Marshal(obj interface{}) ([]byte, error) {
 // Unmarshal -
 func (mm *MarshallerMock) Unmarshal(obj interface{}, buff []byte) error {
 	if obj == nil {
-		return errors.New("nil object to serilize to")
+		return errors.New("nil object to serialize to")
 	}
 
 	if buff == nil {

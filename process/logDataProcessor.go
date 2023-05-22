@@ -6,24 +6,26 @@ import (
 	"github.com/multiversx/mx-chain-core-go/core/check"
 	"github.com/multiversx/mx-chain-core-go/data/outport"
 	"github.com/multiversx/mx-chain-core-go/marshal"
-	logger "github.com/multiversx/mx-chain-logger-go"
 )
-
-var log = logger.GetOrCreate("data-processor")
 
 type logDataProcessor struct {
 	marshaller        marshal.Marshalizer
+	logger            Logger
 	operationHandlers map[string]func(marshalledData []byte) error
 }
 
 // NewLogDataProcessor creates a data processor able to receive data from a ws outport driver and log events
-func NewLogDataProcessor(marshaller marshal.Marshalizer) (DataProcessor, error) {
+func NewLogDataProcessor(marshaller marshal.Marshalizer, logger Logger) (DataProcessor, error) {
 	if check.IfNil(marshaller) {
 		return nil, errNilMarshaller
+	}
+	if check.IfNil(logger) {
+		return nil, errNilLogger
 	}
 
 	dp := &logDataProcessor{
 		marshaller: marshaller,
+		logger:     logger,
 	}
 
 	dp.operationHandlers = map[string]func(marshalledData []byte) error{
@@ -57,7 +59,7 @@ func (dp *logDataProcessor) saveBlock(marshalledData []byte) error {
 		return err
 	}
 
-	log.Info("received payload", "topic", outport.TopicSaveBlock)
+	dp.logger.Info("received payload", "topic", outport.TopicSaveBlock)
 
 	return nil
 }
@@ -69,7 +71,7 @@ func (dp *logDataProcessor) revertIndexedBlock(marshalledData []byte) error {
 		return err
 	}
 
-	log.Info("received payload", "topic", outport.TopicRevertIndexedBlock)
+	dp.logger.Info("received payload", "topic", outport.TopicRevertIndexedBlock)
 
 	return nil
 }
@@ -81,7 +83,7 @@ func (dp *logDataProcessor) saveRounds(marshalledData []byte) error {
 		return err
 	}
 
-	log.Info("received payload", "topic", outport.TopicSaveRoundsInfo)
+	dp.logger.Info("received payload", "topic", outport.TopicSaveRoundsInfo)
 
 	return nil
 }
@@ -93,7 +95,7 @@ func (dp *logDataProcessor) saveValidatorsRating(marshalledData []byte) error {
 		return err
 	}
 
-	log.Info("received payload", "topic", outport.TopicSaveValidatorsRating)
+	dp.logger.Info("received payload", "topic", outport.TopicSaveValidatorsRating)
 
 	return nil
 }
@@ -105,7 +107,7 @@ func (dp *logDataProcessor) saveValidatorsPubKeys(marshalledData []byte) error {
 		return err
 	}
 
-	log.Info("received payload", "topic", outport.TopicSaveValidatorsPubKeys)
+	dp.logger.Info("received payload", "topic", outport.TopicSaveValidatorsPubKeys)
 
 	return nil
 }
@@ -117,7 +119,7 @@ func (dp *logDataProcessor) saveAccounts(marshalledData []byte) error {
 		return err
 	}
 
-	log.Info("received payload", "topic", outport.TopicSaveAccounts)
+	dp.logger.Info("received payload", "topic", outport.TopicSaveAccounts)
 
 	return nil
 }
@@ -129,14 +131,14 @@ func (dp *logDataProcessor) finalizedBlock(marshalledData []byte) error {
 		return err
 	}
 
-	log.Info("received payload", "topic", outport.TopicFinalizedBlock)
+	dp.logger.Info("received payload", "topic", outport.TopicFinalizedBlock)
 
 	return nil
 }
 
 // Close will signal via a log that the data processor is closed
 func (dp *logDataProcessor) Close() error {
-	log.Info("data processor closed")
+	dp.logger.Info("data processor closed")
 	return nil
 }
 
