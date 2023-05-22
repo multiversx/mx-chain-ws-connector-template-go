@@ -11,5 +11,3 @@
     # Signals if in case of data payload processing error, we should send the ack signal or not. If you want to block
     # incoming data in case of a local error, this should be set to true.
     blocking_ack_on_error = false
-    # Possible values: sha256, keccak, blake2b
-    hasher_type = "blake2b"
