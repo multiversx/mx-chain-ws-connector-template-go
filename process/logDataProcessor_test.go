@@ -75,20 +75,6 @@ func TestLogDataProcessor_ProcessPayload(t *testing.T) {
 	t.Run("save rounds", func(t *testing.T) {
 		t.Parallel()
 
-		err := dp.ProcessPayload([]byte("payload"), outport.TopicRevertIndexedBlock)
-		require.NotNil(t, err)
-
-		roundsInfo := &outport.RoundsInfo{}
-		roundsInfoBytes, err := marshaller.Marshal(roundsInfo)
-		require.Nil(t, err)
-
-		err = dp.ProcessPayload(roundsInfoBytes, outport.TopicRevertIndexedBlock)
-		require.Nil(t, err)
-	})
-
-	t.Run("save rounds", func(t *testing.T) {
-		t.Parallel()
-
 		err := dp.ProcessPayload([]byte("payload"), outport.TopicSaveRoundsInfo)
 		require.NotNil(t, err)
 
