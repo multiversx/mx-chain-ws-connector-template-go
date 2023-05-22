@@ -73,7 +73,7 @@ func startConnector(ctx *cli.Context) error {
 		}
 	}
 
-	wsClient, err := factory.CreateWSConnector(cfg)
+	wsClient, err := factory.CreateWSConnector(cfg.WebSocketConfig)
 	if err != nil {
 		return fmt.Errorf("cannot create sovereign notifier, error: %w", err)
 	}
