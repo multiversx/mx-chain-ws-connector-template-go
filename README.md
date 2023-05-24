@@ -8,7 +8,8 @@ Driver, a powerful websocket connection system specifically designed for the Mul
 
 The Outport Driver acts as a crucial bridge between the MultiversX blockchain node and various services that rely on
 receiving up-to-date data from the node. By establishing a websocket connection, the Outport Driver enables seamless
-transmission of essential information, including blocks, validator details, and much more.
+transmission of essential information, including blocks, validator details, account changes, and other processing
+results.
 
 One of the key features of the MultiversX blockchain node is its flexible configuration file. By simply setting a flag
 to "true" within this file, the node can initiate the delivery of data via a websocket connection to any connected
@@ -36,7 +37,7 @@ community to further enhance its capabilities and compatibility with different b
 
 The Outport Driver operates on a robust websocket connection architecture, supporting both server and client roles. The
 system is designed to seamlessly export data from the MultiversX blockchain node, which adopts a sharded architecture
-where each shard represents a separate running chain.
+where each shard represents a separate running chain, interconnected by the meta chain.
 
 To export data from a specific shard, you need to enable an observer node within that shard to export data. One can do
 that
@@ -55,7 +56,8 @@ from `cmd/connector/config/config.toml` to **"server"**.
 
 Alternatively, you have the option to set up the observer node as a server capable of handling multiple clients. This
 setup proves advantageous when multiple services within your ecosystem need to receive exported data. For instance, a
-single node could export data to various services, such as an elastic indexer, a monitoring tool, a notifier, and more.
+single node could export data to various services, such as an elastic indexer, a monitoring tool, a notifier, or other
+implementations.
 
 By tailoring the configuration of the observer nodes and the driver (this template binary) to suit your specific
 requirements, you can effectively streamline and centralize the reception of data from the MultiversX blockchain node.
@@ -81,7 +83,7 @@ ensuring efficient and reliable data transmission.
         +----------------+   +-------------------+
         
         +----------------+   +-------------------+
-        |   Observer 3   |-->|     Receiver 3    |
+        |   Observer 3   |-->|     Receiver 4    |
         +----------------+   +-------------------+                                                 
 ```
 
@@ -108,7 +110,7 @@ ensuring efficient and reliable data transmission.
 
 ### Start building
 
-Once you have an observer node running and configured to export data(either server or client) you can test your
+Once you have an observer node running and configured to export data (either server or client) you can test your
 receiver.
 
 1. Start by navigating to the `cmd/connector` directory in your terminal or file explorer. This is where you'll find
@@ -130,7 +132,7 @@ receiver.
    websocket outport driver and logging events.
 
 7. One can see that `operationHandlers` defines a map of actions and their handler functions for the received payload.
-   All you need to do is to replace the dummy code(which only logs events) with your specific use case on how to handle
+   All you need to do is to replace the dummy code (which only logs events) with your specific use case on how to handle
    received data  (`saveBlock`, `revertIndexedBlock`, etc.). Modify the logic according to your requirements,
    such as saving to a database, triggering other processes, or performing any necessary data transformations.
 
