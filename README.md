@@ -138,4 +138,4 @@ receiver.
    binary again to see your changes in action.
 
 _If you want to test the ws receiver within a local setup testnet environment, you can use the provided demo
-within `cmd` directory._
+within `cmd/demo` directory._
