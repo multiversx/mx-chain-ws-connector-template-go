@@ -49,8 +49,8 @@ setup(){
 }
 
 echoOptions(){
-  echo "This script will start an observer node in the provided shard(metachain/shard).
-  The only acceptable parameters, for the current test configuration, are shard(will use shard 0) and metachain."
+  echo "This script will start an observer node in the provided shard (metachain/shard).
+  The only acceptable parameters, for the current test configuration, are shard (will use shard 0) and metachain."
 }
 
 main(){

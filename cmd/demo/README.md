@@ -7,19 +7,19 @@ This folder contains system test demo for the ws connector, which is going to re
 These scripts provide a demo to help you configure and test your ws connector/driver to receive data from a local
 testnet. The scripts found in this `demo` folder:
 
-- `local-testnet.sh` creates a local testnet with one shard(0) + metachain. Each shard has 2 nodes(1 validator + 1
+- `local-testnet.sh` creates a local testnet with one shard (0) + metachain. Each shard has 2 nodes (1 validator + 1
   observer)
-- `observer-outport.sh` creates an observer in a specified shard(shard/metachain). This node acts an outport driver for
-  the ws connector. When started, it will sync from genesis and export data(blocks, validators info, etc.) to your ws
+- `observer-outport.sh` creates an observer in a specified shard (shard/metachain). This node acts an outport driver for
+  the ws connector. When started, it will sync from genesis and export data (blocks, validators info, etc.) to your ws
   driver connector.
 
-Inside `cmd/connector` folder, there is a `main.go` file which represents the ws connector(data receiver).
+Inside `cmd/connector` folder, there is a `main.go` file which represents the ws connector (data receiver).
 
 > **TIP**: Once you have experimented with this local setup, you might want to test the driver with exported data from
-> an observing squad(mainnet/devnet/testnet). [Here](https://github.com/multiversx/mx-chain-observing-squad) you can find
-> how to run your own observing squad. In order to enable nodes to export data, one needs to set
-> **[HostDriverConfig].Enabled =
-> true**  [from this config file](https://github.com/multiversx/mx-chain-go/blob/master/cmd/node/config/external.toml)
+> an observing squad (mainnet/devnet/testnet). [Here](https://github.com/multiversx/mx-chain-observing-squad) you can
+> find how to run your own observing squad. In order to enable nodes to export data, one needs to set
+> **[HostDriverConfig].Enabled = true**
+> [from this config file](https://github.com/multiversx/mx-chain-go/blob/master/cmd/node/config/external.toml)
 
 ## How to use
 
@@ -31,7 +31,7 @@ bash ./local-testnet.sh new
 bash ./local-testnet.sh start
 ```
 
-2. Start the exporter node in your desired shard(metachain/shard):
+2. Start the exporter node in your desired shard (metachain/shard):
 
 ```bash
 bash ./observer-outport.sh shard
@@ -54,7 +54,7 @@ INFO [2023-05-24 13:53:49.240]   received payload                         topic 
  
 ```
 
-After you finished testing, you can close the observer node and ws connector(can use CTRL+C) as well as the local
+After you finished testing, you can close the observer node and ws connector (can use CTRL+C) as well as the local
 testnet, by executing:
 
 ```bash
