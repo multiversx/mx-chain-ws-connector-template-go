@@ -136,3 +136,6 @@ receiver.
 
 8. Once you have customized the code to handle the received data as desired, you can build and run the `connector`
    binary again to see your changes in action.
+
+_If you want to test the ws receiver within a local setup testnet environment, you can use the provided demo
+within `cmd` directory._
