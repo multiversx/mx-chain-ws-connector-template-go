@@ -43,7 +43,7 @@ that
 by enabling the **[HostDriverConfig].Enabled** flag to true
 [from this config file](https://github.com/MultiversX/mx-chain-go/blob/master/cmd/node/config/external.toml)
 
-In our case of a network consisting of three shards and a metachain, you would require three separate websocket receiver
+In our case of a network consisting of three shards and a metachain, you would require four separate websocket receiver
 binaries, each responsible for receiving data from its respective shard. This distributed approach ensures data
 integrity and allows for shard-specific data processing.
 
