@@ -7,8 +7,6 @@ VARIABLES_PATH=$SCRIPTS_DIR/variables.sh
 OBSERVERS_PATH=$SCRIPTS_DIR/include/observers.sh
 VALIDATORS_PATH=$SCRIPTS_DIR/include/validators.sh
 ENABLE_EPOCH_DIR=$TESTNET_DIR/mx-chain-go/cmd/node/config/enableEpochs.toml
-CONFIG_DIR=$TESTNET_DIR/mx-chain-go/cmd/node/config/config.toml
-SYSTEM_SC_CONFIG_DIR=$TESTNET_DIR/mx-chain-go/cmd/node/config/systemSmartContractsConfig.toml
 SANDBOX_NAME=sandbox
 
 cloneDependencies(){
