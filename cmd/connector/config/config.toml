@@ -4,6 +4,8 @@
     url = "localhost:22111"
     # Possible values: json, gogo protobuf. Should be compatible with [HostDriverConfig].MarshallerType
     marshaller_type = "json"
+    # This flag describes the mode to start the WebSocket connector. Can be "client" or "server"
+    mode = "client"
     # Retry duration (receive/send data/acknowledge) in seconds
     retry_duration = 5
     # This flag specifies if we should send an acknowledge signal upon recieving data

@@ -43,7 +43,7 @@ func createWsHost(wsMarshaller marshal.Marshalizer, cfg config.WebSocketConfig) 
 		WebSocketConfig: data.WebSocketConfig{
 			URL:                cfg.Url,
 			WithAcknowledge:    cfg.WithAcknowledge,
-			Mode:               data.ModeClient,
+			Mode:               cfg.Mode,
 			RetryDurationInSec: int(cfg.RetryDuration),
 			BlockingAckOnError: cfg.BlockingAckOnError,
 		},

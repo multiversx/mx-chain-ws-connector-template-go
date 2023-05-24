@@ -58,7 +58,7 @@ func TestLogDataProcessor_ProcessPayload(t *testing.T) {
 			InfoCalled: func(message string, args ...interface{}) {
 				require.Equal(t, "received payload", message)
 				require.Len(t, args, 1)
-				require.Equal(t, args[0], []interface{}{"topic", outport.TopicSaveBlock})
+				require.Equal(t, []interface{}{"topic", outport.TopicSaveBlock, "hash", []byte("hash")}, args[0])
 				logInfoCalledCt++
 			},
 		}
@@ -66,11 +66,19 @@ func TestLogDataProcessor_ProcessPayload(t *testing.T) {
 
 		err := dp.ProcessPayload([]byte("payload"), outport.TopicSaveBlock)
 		require.NotNil(t, err)
+		require.Equal(t, 0, logInfoCalledCt)
 
 		outportBlock := &outport.OutportBlock{}
 		outportBlockBytes, err := marshaller.Marshal(outportBlock)
 		require.Nil(t, err)
+
+		err = dp.ProcessPayload(outportBlockBytes, outport.TopicSaveBlock)
+		require.Equal(t, errNilOutportBlockData, err)
 		require.Equal(t, 0, logInfoCalledCt)
+
+		outportBlock.BlockData = &outport.BlockData{HeaderHash: []byte("hash")}
+		outportBlockBytes, err = marshaller.Marshal(outportBlock)
+		require.Nil(t, err)
 
 		err = dp.ProcessPayload(outportBlockBytes, outport.TopicSaveBlock)
 		require.Nil(t, err)
@@ -85,7 +93,7 @@ func TestLogDataProcessor_ProcessPayload(t *testing.T) {
 			InfoCalled: func(message string, args ...interface{}) {
 				require.Equal(t, "received payload", message)
 				require.Len(t, args, 1)
-				require.Equal(t, args[0], []interface{}{"topic", outport.TopicRevertIndexedBlock})
+				require.Equal(t, []interface{}{"topic", outport.TopicRevertIndexedBlock}, args[0])
 				logInfoCalledCt++
 			},
 		}
@@ -112,7 +120,7 @@ func TestLogDataProcessor_ProcessPayload(t *testing.T) {
 			InfoCalled: func(message string, args ...interface{}) {
 				require.Equal(t, "received payload", message)
 				require.Len(t, args, 1)
-				require.Equal(t, args[0], []interface{}{"topic", outport.TopicSaveRoundsInfo})
+				require.Equal(t, []interface{}{"topic", outport.TopicSaveRoundsInfo}, args[0])
 				logInfoCalledCt++
 			},
 		}
@@ -139,7 +147,7 @@ func TestLogDataProcessor_ProcessPayload(t *testing.T) {
 			InfoCalled: func(message string, args ...interface{}) {
 				require.Equal(t, "received payload", message)
 				require.Len(t, args, 1)
-				require.Equal(t, args[0], []interface{}{"topic", outport.TopicSaveValidatorsRating})
+				require.Equal(t, []interface{}{"topic", outport.TopicSaveValidatorsRating}, args[0])
 				logInfoCalledCt++
 			},
 		}
@@ -166,7 +174,7 @@ func TestLogDataProcessor_ProcessPayload(t *testing.T) {
 			InfoCalled: func(message string, args ...interface{}) {
 				require.Equal(t, "received payload", message)
 				require.Len(t, args, 1)
-				require.Equal(t, args[0], []interface{}{"topic", outport.TopicSaveValidatorsPubKeys})
+				require.Equal(t, []interface{}{"topic", outport.TopicSaveValidatorsPubKeys}, args[0])
 				logInfoCalledCt++
 			},
 		}
@@ -193,7 +201,7 @@ func TestLogDataProcessor_ProcessPayload(t *testing.T) {
 			InfoCalled: func(message string, args ...interface{}) {
 				require.Equal(t, "received payload", message)
 				require.Len(t, args, 1)
-				require.Equal(t, args[0], []interface{}{"topic", outport.TopicSaveAccounts})
+				require.Equal(t, []interface{}{"topic", outport.TopicSaveAccounts}, args[0])
 				logInfoCalledCt++
 			},
 		}
@@ -220,7 +228,7 @@ func TestLogDataProcessor_ProcessPayload(t *testing.T) {
 			InfoCalled: func(message string, args ...interface{}) {
 				require.Equal(t, "received payload", message)
 				require.Len(t, args, 1)
-				require.Equal(t, args[0], []interface{}{"topic", outport.TopicFinalizedBlock})
+				require.Equal(t, []interface{}{"topic", outport.TopicFinalizedBlock}, args[0])
 				logInfoCalledCt++
 			},
 		}
