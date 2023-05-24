@@ -48,9 +48,10 @@ Once the setup is ready, the connected driver will start receiving data from the
 info:
 
 ```
-INFO [2023-05-22 16:42:02.017]   received payload                         topic = SaveRoundsInfo 
-INFO [2023-05-22 16:42:07.010]   received payload                         topic = FinalizedBlock 
-INFO [2023-05-22 16:42:07.010]   received payload                         topic = SaveBlock 
+INFO [2023-05-24 13:53:49.234]   received payload                         topic = SaveBlock hash = de0d84d2e88f83916cfa955121938c952ceab657cd49852cac51f7f5c7c0091a 
+INFO [2023-05-24 13:53:49.234]   received payload                         topic = SaveRoundsInfo 
+INFO [2023-05-24 13:53:49.240]   received payload                         topic = FinalizedBlock 
+ 
 ```
 
 After you finished testing, you can close the observer node and ws connector(can use CTRL+C) as well as the local

@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-# Possible values: "client"/"server"
-OBSERVER_MODE="client"
+# Possible values: "server"/"client"
+OBSERVER_MODE="server"
 
 CURRENT_DIR=$(pwd)
 SANDBOX_PATH=$CURRENT_DIR/testnet/testnet-local/sandbox
@@ -34,7 +34,7 @@ setupObserver(){
 
   sed -i "s@DestinationShardAsObserver =.*@DestinationShardAsObserver = \"$1\"@" $OBSERVER_PATH/config/prefs.toml
   sed -i '/HostDriverConfig\]/!b;n;n;c\    Enabled = true' "$EXTERNAL_CONFIG_DIR"
-  sed -i 's/Mode =.*/Mode = "$OBSERVER_MODE"/' "$EXTERNAL_CONFIG_DIR"
+  sed -i "s@Mode =.*@Mode = \"$OBSERVER_MODE\"@" "$EXTERNAL_CONFIG_DIR"
   sed -i 's/MarshallerType =.*/MarshallerType = "json"/' "$EXTERNAL_CONFIG_DIR"
   sed -i 's/BlockingAckOnError =.*/BlockingAckOnError = false/' "$EXTERNAL_CONFIG_DIR"
 

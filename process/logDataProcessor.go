@@ -59,7 +59,11 @@ func (dp *logDataProcessor) saveBlock(marshalledData []byte) error {
 		return err
 	}
 
-	dp.logger.Info("received payload", "topic", outport.TopicSaveBlock)
+	if outportBlock.BlockData == nil {
+		return errNilOutportBlockData
+	}
+
+	dp.logger.Info("received payload", "topic", outport.TopicSaveBlock, "hash", outportBlock.BlockData.HeaderHash)
 
 	return nil
 }

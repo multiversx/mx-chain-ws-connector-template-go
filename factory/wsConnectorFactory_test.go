@@ -14,6 +14,7 @@ func createConfig() config.WebSocketConfig {
 		RetryDuration:      1,
 		WithAcknowledge:    false,
 		BlockingAckOnError: false,
+		Mode:               "client",
 	}
 }
 
