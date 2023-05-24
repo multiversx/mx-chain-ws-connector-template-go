@@ -3,6 +3,7 @@ package factory
 import (
 	"testing"
 
+	"github.com/multiversx/mx-chain-communication-go/websocket/data"
 	"github.com/multiversx/mx-chain-ws-connector-template-go/config"
 	"github.com/stretchr/testify/require"
 )
@@ -14,7 +15,7 @@ func createConfig() config.WebSocketConfig {
 		RetryDuration:      1,
 		WithAcknowledge:    false,
 		BlockingAckOnError: false,
-		Mode:               "client",
+		Mode:               data.ModeClient,
 	}
 }
 

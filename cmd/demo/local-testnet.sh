@@ -17,12 +17,18 @@ cloneDependencies(){
   mkdir "$TESTNET_DIR"
 
   git clone https://github.com/multiversx/mx-chain-go "$TESTNET_DIR/mx-chain-go"
-  cd $TESTNET_DIR/mx-chain-go
-  git checkout rc/v1.6.0
-  cd ../..
+  checkoutStableVersion mx-chain-go
 
   git clone https://github.com/multiversx/mx-chain-deploy-go "$TESTNET_DIR/mx-chain-deploy-go"
+
   git clone https://github.com/multiversx/mx-chain-proxy-go "$TESTNET_DIR/mx-chain-proxy-go"
+  checkoutStableVersion mx-chain-proxy-go
+}
+
+checkoutStableVersion(){
+    cd $TESTNET_DIR/$1
+    git checkout rc/v1.6.0
+    cd ../..
 }
 
 testnetRemove(){

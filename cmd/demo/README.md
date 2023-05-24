@@ -26,15 +26,15 @@ Inside `cmd/connector` folder, there is a `main.go` file which represents the ws
 1. Create and start a local testnet:
 
 ```bash
-cd scripts
-./local-testnet.sh new
-./local-testnet.sh start
+cd cmd/demo
+bash ./local-testnet.sh new
+bash ./local-testnet.sh start
 ```
 
 2. Start the exporter node in your desired shard(metachain/shard):
 
 ```bash
-./observer-outport.sh shard
+bash ./observer-outport.sh shard
 ```
 
 3. Inside `cmd/connector`, start your driver to receive exported data:
@@ -58,5 +58,5 @@ After you finished testing, you can close the observer node and ws connector(can
 testnet, by executing:
 
 ```bash
-./local-testnet.sh stop
+bash ./local-testnet.sh stop
 ```

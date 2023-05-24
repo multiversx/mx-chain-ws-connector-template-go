@@ -38,7 +38,7 @@ setupObserver(){
   sed -i 's/MarshallerType =.*/MarshallerType = "json"/' "$EXTERNAL_CONFIG_DIR"
   sed -i 's/BlockingAckOnError =.*/BlockingAckOnError = false/' "$EXTERNAL_CONFIG_DIR"
 
-  ./node --log-level *:INFO
+  ./node --log-level *:INFO --rest-api-interface :10044
 }
 
 
