@@ -41,11 +41,12 @@ func CreateWSConnector(cfg config.WebSocketConfig) (process.WSConnector, error) 
 func createWsHost(wsMarshaller marshal.Marshalizer, cfg config.WebSocketConfig) (factoryHost.FullDuplexHost, error) {
 	return factoryHost.CreateWebSocketHost(factoryHost.ArgsWebSocketHost{
 		WebSocketConfig: data.WebSocketConfig{
-			URL:                cfg.Url,
-			WithAcknowledge:    cfg.WithAcknowledge,
-			Mode:               cfg.Mode,
-			RetryDurationInSec: int(cfg.RetryDuration),
-			BlockingAckOnError: cfg.BlockingAckOnError,
+			URL:                        cfg.Url,
+			WithAcknowledge:            cfg.WithAcknowledge,
+			Mode:                       cfg.Mode,
+			RetryDurationInSec:         int(cfg.RetryDuration),
+			BlockingAckOnError:         cfg.BlockingAckOnError,
+			DropMessagesIfNoConnection: false,
 		},
 		Marshaller: wsMarshaller,
 		Log:        log,

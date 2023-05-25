@@ -3,7 +3,7 @@ module github.com/multiversx/mx-chain-ws-connector-template-go
 go 1.17
 
 require (
-	github.com/multiversx/mx-chain-communication-go v1.0.0
+	github.com/multiversx/mx-chain-communication-go v1.0.1
 	github.com/multiversx/mx-chain-core-go v1.2.4
 	github.com/multiversx/mx-chain-logger-go v1.0.11
 	github.com/stretchr/testify v1.8.2
