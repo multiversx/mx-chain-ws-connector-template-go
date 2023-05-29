@@ -101,10 +101,6 @@ ensuring efficient and reliable data transmission.
                              |                   |
         +----------------+   |                   |
         |   Observer 3   |-->|                   |
-        +----------------+   |                   |
-                             |                   |
-        +----------------+   |                   |
-        |    Receiver    |-->|                   |
         +----------------+   +-------------------+
 ```
 
@@ -140,4 +136,4 @@ receiver.
    binary again to see your changes in action.
 
 _If you want to test the ws receiver within a local setup testnet environment, you can use the provided demo
-within `cmd/demo` directory._
+within [demo directory](cmd/demo)._
